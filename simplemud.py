@@ -125,11 +125,12 @@ while True:
 
             # send the player back the list of possible commands
             mud.send_message(id,"Commands:")
-            mud.send_message(id,"  say <message>  - Says something out loud, e.g. 'say Hello'")
-            mud.send_message(id,"  look           - Examines the surroundings, e.g. 'look'")
-            mud.send_message(id,"  go <exit>      - Moves through the exit specified, e.g. 'go outside'")
-            mud.send_message(id,"  emote <action> - Perform an action or emotion, e.g. 'emote laughs'")
-            mud.send_message(id,"  shout <message>- Shout to all players")
+            mud.send_message(id,"  say <message>              - Says something out loud, e.g. 'say Hello'")
+            mud.send_message(id,"  look                       - Examines the surroundings, e.g. 'look'")
+            mud.send_message(id,"  go <exit>                  - Moves through the exit specified, e.g. 'go outside'")
+            mud.send_message(id,"  emote <action>             - Perform an action or emotion, e.g. 'emote laughs'")
+            mud.send_message(id,"  shout <message>            - Shout to all players")
+            mud.send_message(id,"  whisper <player> <message> - private whisper to a specific player")
 
         # 'emote' command
         elif command == "emote" or command == "e":
@@ -164,21 +165,20 @@ while True:
             #split the params to get the target player and the message sent
             [target, message] = params.split(' ', 1 );
             found = None
-             # # go through every player in the game
+            # go through every player in the game
             for pid,pl in players.items():
                 # if the target is logged in
                 if players[pid]["name"] == target:
-                    if players[id]["room"] == players[pid]["room"]:
-                        found = True
-                        # send them a message telling them what the player said
-                        mud.send_message(pid, "%s whispers: %s" % (target, message))
-                        #send ack to player sending message
-                        mud.send_message(id, "You whisper '%s' to %s" % (message, target))
-                    else:
-                        mud.send_message(id, "%s not found" % (target))
+                    found = True
+                    # send them a message telling them what the player said
+                    mud.send_message(pid, "%s whispers: %s" % (target, message))
+                    #send ack to player sending message
+                    mud.send_message(id, "You whisper '%s' to %s" % (message, target))
+                else:
+                    mud.send_message(id, "%s not found" % (target))
             if found is False:
                 mud.send_message(id, "%s not found" % (target))
-                    
+
         # 'look' command
         elif command in ("look", "l"):
 
