@@ -22,3 +22,6 @@ port 23.
 
 Then to connect do: telnet ip-address (or localhost)
 
+
+TODO list
+---------
