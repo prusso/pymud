@@ -160,20 +160,25 @@ while True:
 
 
         # # 'whisper' command
-        # elif command in ("whisper", "w"):
-
-        #     # # go through every player in the game
-        #     for pid,pl in players.items():
-        #     #     print("pure pid: ", pid)
-        #     #     print("pure pl: ", pl)
-        #     #     print("players pid name: ", players[pid]["name"])
-        #     #     print("players id name: ", players[id]["name"])
-        #     #     print("pl name: ", pl["name"])
-        #     #     # if they're in the same room as the player
-        #         if players[pid]["name"] == :
-        #     #         # send them a message telling them what the player said
-        #             mud.send_message(pid, "%s whispers: %s" % (players[id]["name"],params) )
-
+        elif command in ("whisper", "w"):
+            #split the params to get the target player and the message sent
+            [target, message] = params.split(' ', 1 );
+            found = None
+             # # go through every player in the game
+            for pid,pl in players.items():
+                # if the target is logged in
+                if players[pid]["name"] == target:
+                    if players[id]["room"] == players[pid]["room"]:
+                        found = True
+                        # send them a message telling them what the player said
+                        mud.send_message(pid, "%s whispers: %s" % (target, message))
+                        #send ack to player sending message
+                        mud.send_message(id, "You whisper '%s' to %s" % (message, target))
+                    else:
+                        mud.send_message(id, "%s not found" % (target))
+            if found is False:
+                mud.send_message(id, "%s not found" % (target))
+                    
         # 'look' command
         elif command in ("look", "l"):
 
