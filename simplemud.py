@@ -18,6 +18,8 @@ Some ideas for things to try adding:
 from mudserver import MudServer
 # import time for the "100% CPU hack"
 import time
+# import re to allow for regex matching
+import re
 
 # structure defining the rooms in the game. Try adding more rooms to the game!
 rooms = {
@@ -161,20 +163,26 @@ while True:
 
         # # 'whisper' command
         elif command in ("whisper", "w"):
-            #split the params to get the target player and the message sent
-            [target, message] = params.split(' ', 1 );
-            found = False
-            # go through every player in the game
-            for pid,pl in players.items():
-                # if the target is logged in
-                if players[pid]["name"] == target:
-                    found = True
-                    # send them a message telling them what the player said
-                    mud.send_message(pid, "%s whispers: %s" % (target, message))
-                    #send ack to player sending message
-                    mud.send_message(id, "You whisper '%s' to %s" % (message, target))
-            if found is False:
-                mud.send_message(id, "%s not found" % (target))
+            #verify that there is a player to send and there is a message
+            matchobj = re.match('([^\s]+) (.*)', params)
+            # if there is a match go ahead and proceed with the command, else print out usage to the player
+            if matchobj:
+                #split the params to get the target player and the message sent
+                [target, message] = params.split(' ', 1 );
+                found = False
+                # go through every player in the game
+                for pid,pl in players.items():
+                    # if the target is logged in
+                    if players[pid]["name"] == target:
+                        found = True
+                        # send them a message telling them what the player said
+                        mud.send_message(pid, "%s whispers: %s" % (target, message))
+                        #send ack to player sending message
+                        mud.send_message(id, "You whisper '%s' to %s" % (message, target))
+                if found is False:
+                    mud.send_message(id, "%s not found" % (target))
+            else:
+                mud.send_message(id, "Usage: whisper <player> <message>")
 
         # 'look' command
         elif command in ("look", "l"):
