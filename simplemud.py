@@ -19,6 +19,7 @@ Some ideas for things to try adding:
 
 # import the MUD server class
 from mudserver import MudServer
+# import time for the "100% CPU hack"
 import time
 import re
 
@@ -249,4 +250,6 @@ while True:
         else:
             # send back an 'unknown command' message
             mud.send_message(id, "Unknown command '%s'" % command)
+
+    # a hack to "fix" the 100% CPU issue        
     time.sleep(0.05)
