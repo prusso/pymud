@@ -19,6 +19,7 @@ Some ideas for things to try adding:
 
 # import the MUD server class
 from mudserver import MudServer
+import time
 
 # structure defining the rooms in the game. Try adding more rooms to the game!
 rooms = {
@@ -164,7 +165,7 @@ while True:
         elif command in ("whisper", "w"):
             #split the params to get the target player and the message sent
             [target, message] = params.split(' ', 1 );
-            found = None
+            found = False
             # go through every player in the game
             for pid,pl in players.items():
                 # if the target is logged in
@@ -174,8 +175,6 @@ while True:
                     mud.send_message(pid, "%s whispers: %s" % (target, message))
                     #send ack to player sending message
                     mud.send_message(id, "You whisper '%s' to %s" % (message, target))
-                else:
-                    mud.send_message(id, "%s not found" % (target))
             if found is False:
                 mud.send_message(id, "%s not found" % (target))
 
@@ -244,4 +243,4 @@ while True:
         else:
             # send back an 'unknown command' message
             mud.send_message(id, "Unknown command '%s'" % command)
-
+    time.sleep(0.05)
