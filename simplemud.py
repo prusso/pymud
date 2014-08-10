@@ -21,6 +21,7 @@ Some ideas for things to try adding:
 from mudserver import MudServer
 # import time for the "100% CPU hack"
 import time
+# import re to allow for regex matching
 import re
 
 # structure defining the rooms in the game. Try adding more rooms to the game!
@@ -167,6 +168,7 @@ while True:
         elif command in ("whisper", "w"):
             #verify that there is a player to send and there is a message
             matchobj = re.match('([^\s]+) (.*)', params)
+            # if there is a match go ahead and proceed with the command, else print out usage to the player
             if matchobj:
                 #split the params to get the target player and the message sent
                 [target, message] = params.split(' ', 1 );
