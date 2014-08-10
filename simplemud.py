@@ -4,9 +4,6 @@ their surroundings and move between rooms.
 
 Some ideas for things to try adding:
     * More rooms to explore
-    * An 'emote' command e.g. 'emote laughs out loud' -> 'Mark laughs out loud'
-    * A 'whisper' command for talking to individual players
-    * A 'shout' command for yelling to players in all rooms
     * Items to look at in rooms e.g. 'look fireplace' -> 'You see a roaring, glowing fire'
     * Items to pick up e.g. 'take rock' -> 'You pick up the rock'
     * Monsters to fight
