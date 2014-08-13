@@ -12,7 +12,6 @@ import select
 import time
 import sys
 
-
 class MudServer(object):
     """
     The server will listen for players connecting using Telnet.

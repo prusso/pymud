@@ -21,7 +21,7 @@ import time
 # import re to allow for regex matching
 import re
 
-# structure defining the rooms in the game. Try adding more rooms to the game!
+# structure defining the rooms in the game.
 rooms = {
     "Tavern": {
         "description": "You're in a cozy tavern warmed by an open fire.",
@@ -118,9 +118,7 @@ while True:
             # send the new player the description of their current room
             mud.send_message(id,rooms[players[id]["room"]]["description"])
 
-        # each of the possible commands is handled below. Try adding new commands
-        # to the game!
-
+        # each of the possible commands is handled below.
         # 'help' command
         elif command == "help":
 
